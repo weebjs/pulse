@@ -1,0 +1,11 @@
+{
+    "token": "gapi_0ctezqZheytg0Ox97e8M9z+pPNjjcw9YHTj73ASGpylg/khlj0qIfX7saT8MWuQ5f7nroCqE0LRVSW7uiOkH9Q==",
+    "prefix": "doge-",
+    "color": {
+        "positive": "GREEN",
+        "negative": "RED",
+        "neutral": "0xFDDB5B",
+        "warn": "YELLOW"
+    },
+    "ownerId": "12345"
+}
