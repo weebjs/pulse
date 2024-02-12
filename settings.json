@@ -1,8 +1,8 @@
 {
-    "token": "gapi_0ctezqZheytg0Ox97e8M9z+pPNjjcw9YHTj73ASGpylg/khlj0qIfX7saT8MWuQ5f7nroCqE0LRVSW7uiOkH9Q==",
-    "prefix": "doge-",
+    "token": "gapi_mnv91VadfRK0CpPBds+bnHYNEbGofKg4oCMcjH0caBErhTNB5GFQp4ku2OJe3o7kE2EFDSSxKxPK+jo3HfwQbw==",
+    "prefix": "k!",
     "color": {
-        "positive": "GREEN",
+        "positive": "WHITE",
         "negative": "RED",
         "neutral": "0xFDDB5B",
         "warn": "YELLOW"
