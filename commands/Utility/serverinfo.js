@@ -20,18 +20,18 @@ module.exports = {
 
       const embed = new Embed()
         .addFields([
-          { name: "Name:", value: server.name, inline: true },
-          { name: "Description:", value: server.description ? server.description : "N/A" },
-          { name: "Created:", value: moment(server.createdAt).format("MMMM Do, YYYY"), inline: true },
-          { name: "Verified:", value: server.isVerified ? "👍" : "👎", inline: true },
-          { name: "Owner:", value: `<@${server.ownerId}>`, inline: true },
-          { name: "Timezone:", value: server.timezone ? server.timezone : "❔", inline: true },
-          { name: "URL:", value: server.url ? `[${server.name}](${server.url})` : "❔", inline: true },
-          { name: "Members:", value: `${memberIds.length}`, inline: true }
+          { name: "Name:", value: server.name, inline: false },
+          { name: "Description:", value: server.description ? server.description : "None" },
+          { name: "Created:", value: moment(server.createdAt).format("MMMM Do, YYYY"), inline: false },
+          { name: "Verified:", value: server.isVerified ? "👍" : "👎", inline: false },
+          { name: "Owner:", value: `<@${server.ownerId}>`, inline: false },
+          { name: "Timezone:", value: server.timezone ? server.timezone : "Unknown", inline: false },
+          { name: "URL:", value: server.url ? `[${server.name}](${server.url})` : "❔", inline: false },
+          { name: "Members:", value: `${memberIds.length}`, inline: false }
         ])
         .setThumbnail(server.iconURL)
         .setImage(server.raw.banner)
-        .setColor("#F5C400");
+        .setColor("#EAD5FF");
 
       message.reply({ embeds: [embed], isSilent: true });
     } catch (error) {

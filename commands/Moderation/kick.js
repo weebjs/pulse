@@ -3,10 +3,19 @@ const { Embed } = require("guilded.js");
 module.exports = {
   name: "kick",
   description: "Kick a member from the server.",
-  run: async ({ client, message, args }) => {
-    if (message.author.id !== message.server?.ownerId) {
-      return message.reply("You need to be a server owner to execute this command.");
-    }o
+  run: async (client, message, args) => {
+    if (message.authorId !== message.server?.ownerId) {
+      const embed = new Embed()
+        .setColor("RED")
+        .setTitle("Error!")
+        .setDescription("You need to be a server owner to execute this command.");
+
+      return message.reply({ embeds: [embed] });
+    }
+    
+    // Log authorId and message.server.ownerId
+    console.log("authorId:", message.authorId);
+    console.log("ownerId:", message.server.ownerId);
 
     let targetId;
     if (message.mentions && message.mentions.users) {
@@ -18,7 +27,12 @@ module.exports = {
     if (targetId) {
       const target = await client.members.fetch(`${message.serverId}`, targetId)
         .catch(() => {
-          return message.reply("That user does not exist.");
+          const embed = new Embed()
+            .setColor("RED")
+            .setTitle("Error!")
+            .setDescription("That user does not exist.");
+
+          return message.reply({ embeds: [embed] });
         });
 
       if (!target.isOwner) {
@@ -26,15 +40,26 @@ module.exports = {
           .then(() => {
             const embed = new Embed()
               .setColor("GREEN")
-              .setDescription(`✅ **${target.username}** (${target.id}) has been kicked!`)
-              .setTimestamp();
+              .setTitle("Success ✅")
+              .setDescription(`**${target.username}** (\`${target.id}\`) has been kicked!`);
+
             return message.reply({ embeds: [embed] });
           });
       } else {
-        return message.reply("That user cannot be kicked.");
+        const embed = new Embed()
+          .setColor("RED")
+          .setTitle("Error!")
+          .setDescription("That user cannot be kicked.");
+
+        return message.reply({ embeds: [embed] });
       }
     } else {
-      return message.reply("Mention a user or provide an ID to kick.");
+      const embed = new Embed()
+        .setColor("RED")
+        .setTitle("Error!")
+        .setDescription("Please mention or provide a user id to kick a user. Here's an example: `p!kick [@username]`");
+
+      return message.reply({ embeds: [embed] });
     }
   },
 };
