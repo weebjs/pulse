@@ -1,8 +1,8 @@
 const { Embed } = require("guilded.js");
 
 module.exports = {
-  name: "kick",
-  description: "Kick a member from the server.",
+  name: "ban",
+  description: "ban a member from the server.",
   run: async (client, message, args) => {
     if (message.authorId !== message.server?.ownerId) {
       const embed = new Embed()
@@ -36,7 +36,7 @@ module.exports = {
         });
 
       if (!target.isOwner) {
-        await target.kick()
+        await target.ban()
           .then(() => {
             const embed = new Embed()
               .setColor("GREEN")
@@ -57,7 +57,7 @@ module.exports = {
       const embed = new Embed()
         .setColor("RED")
         .setTitle("Error!")
-        .setDescription("Please mention or provide a user ID to kick a user. Here's an example: `p!kick [@username]`");
+        .setDescription("Please mention or provide a user ID to ban a user. Here's an example: `p!kick [@username]`");
 
       return message.reply({ embeds: [embed] });
     }
