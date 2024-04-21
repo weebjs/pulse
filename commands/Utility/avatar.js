@@ -17,14 +17,9 @@ module.exports = {
     const server = await client.servers.fetch(message.serverId);
 
     const embed = new Embed()
-      .setTitle(`<@${user}> (${user})`)
+      .setTitle(`<@${user}>'s avatar`)
       .setColor("#EAD5FF")
-      .addFields([
-        { name: "Nickname", value: member.nickname ? member.nickname : "None", inline: false },
-        { name: "ID", value: member.user.id, inline: false },
-        { name: "Server Join", value: moment(member.joinedAt).format("M/D/YYYY h:mm A"), inline: false },
-        { name: "Account Creation", value: moment(member.user.createdAt).format("M/D/YYYY h:mm A"), inline: false },
-      ])
+      .setImage(member.user.avatar)
 
       return message.reply({ embeds: [embed] });
   },

@@ -11,7 +11,6 @@ app.get('/', (req, res) => {
   res.send(`Ready`)
 })
 app.listen(port, () => {
-  console.log(`Doge's API is listening to port : ${port}`)
 })
 
 client.commands = new Collection();

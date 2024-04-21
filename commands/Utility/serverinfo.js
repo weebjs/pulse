@@ -33,7 +33,7 @@ module.exports = {
         .setImage(server.raw.banner)
         .setColor("#EAD5FF");
 
-      message.reply({ embeds: [embed], isSilent: true });
+      return message.reply({ embeds: [embed] });
     } catch (error) {
       console.error(error);
     }

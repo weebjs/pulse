@@ -12,7 +12,7 @@ module.exports = {
         .setTitle("Error!")
         .setDescription(`You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you can't execute this command!`);
 
-      return message.reply({ embeds: [embed] });
+      return message.reply({ embeds: [embed], isSilent: true });
     }
     
     
