@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -18,7 +19,7 @@
     "express": "^4.18.2",
     "google-translate-api": "^2.3.0",
     "guilded.js": "^0.24.1",
-    "guilded.ts": "^0.20.2", 
+    "guilded.ts": "^0.20.2",
     "mathjs": "^11.8.0",
     "moment": "^2.29.4",
     "mongofy": "^1.0.0",
@@ -27,6 +28,7 @@
     "quick.db": "^9.1.5",
     "quickmongo": "^5.2.0",
     "snekfetch": "^4.0.4",
+    "surrealdb.js": "^1.0.0-beta.5",
     "weather-js": "^2.0.0",
     "wikipedia": "^2.0.0"
   }
