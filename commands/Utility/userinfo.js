@@ -20,11 +20,12 @@ module.exports = {
       .setTitle(`<@${user}> (${user})`)
       .setColor("#EAD5FF")
       .addFields([
-        { name: "Nickname", value: member.nickname ? member.nickname : "None", inline: false },
+        { name: "Nickname", value: member.nickname ? member.nickname : "None", inline: true },
         { name: "ID", value: member.user.id, inline: false },
         { name: "Server Join", value: moment(member.joinedAt).format("M/D/YYYY h:mm A"), inline: false },
         { name: "Account Creation", value: moment(member.user.createdAt).format("M/D/YYYY h:mm A"), inline: false },
       ])
+      .setThumbnail(member.user.avatar)
 
       return message.reply({ embeds: [embed] });
   },
