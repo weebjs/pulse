@@ -1,22 +1,21 @@
 const { Embed } = require("guilded.js");
 
 module.exports = {
-  name: "ban",
-  description: "ban a member from the server.",
+  name: "kick",
+  description: "Kick a member from the server.",
   run: async (client, message, args) => {
-    if (message.authorId !== message.server?.ownerId) {
+    const server = await client.servers.fetch(message.serverId);
+
+    if (message.authorId !== server.ownerId) {
       const embed = new Embed()
         .setColor("RED")
         .setTitle("Error!")
-        .setDescription("You need to be a server owner to execute this command.");
+        .setDescription(`You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you can't execute this command!`);
 
       return message.reply({ embeds: [embed] });
     }
     
-    // Log authorId and message.server.ownerId
-    console.log("authorId:", message.authorId);
-    console.log("ownerId:", message.server.ownerId);
-
+    
     let targetId;
     if (message.mentions && message.mentions.users) {
       targetId = message.mentions.users[0].id;
@@ -41,7 +40,7 @@ module.exports = {
             const embed = new Embed()
               .setColor("GREEN")
               .setTitle("Success ✅")
-              .setDescription(`**${target.username}** (\`${target.id}\`) has been kicked!`);
+              .setDescription(`**${target.username}** (\`${target.id}\`) has been banned!`);
 
             return message.reply({ embeds: [embed] });
           });
@@ -49,7 +48,7 @@ module.exports = {
         const embed = new Embed()
           .setColor("RED")
           .setTitle("Error!")
-          .setDescription("That user cannot be kicked.");
+          .setDescription("That user cannot be banned.");
 
         return message.reply({ embeds: [embed] });
       }
