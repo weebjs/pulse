@@ -19,7 +19,6 @@ module.exports = {
     const embed = new Embed()
       .setTitle(`<@${user}>'s avatar`)
       .setColor("#EAD5FF")
-      .setImage(member.user.avatar)
 
       return message.reply({ embeds: [embed] });
   },
