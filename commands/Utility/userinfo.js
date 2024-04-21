@@ -25,7 +25,7 @@ module.exports = {
         { name: "Server Join", value: moment(member.joinedAt).format("M/D/YYYY h:mm A"), inline: false },
         { name: "Account Creation", value: moment(member.user.createdAt).format("M/D/YYYY h:mm A"), inline: false },
       ])
-      .setThumbnail(member.user.avatar)
+      
 
       return message.reply({ embeds: [embed] });
   },
