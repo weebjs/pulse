@@ -15,7 +15,7 @@ module.exports = {
 
         if (!command) {
           const embed = new Embed()
-            .setTitle("Uh Oh ❗")
+            .setTitle("Error!")
             .setDescription("This command doesn't exist.")
             .setColor("#FF3131");
 
@@ -31,7 +31,7 @@ module.exports = {
         }
       } else {
         // If no command name is provided, display information about all available commands
-        const commandsPath = "./commands"; // Path to the commands folder
+        const commandsPath = "./src"; // Path to the commands folder
         const folders = fs.readdirSync(commandsPath); // Get the list of folders in the commands folder
 
         const embed = new Embed()
