@@ -1,7 +1,6 @@
 const { Embed } = require("guilded.js");
 const fs = require("fs");
-const WebSocket = require('ws');
-const settings = '../settings.json'
+const WebSocket = require('ws')
 
 let logsEnabled = false;
 let socket;
@@ -54,7 +53,7 @@ module.exports = {
 };
 
 // WebSocket connection
-const token = settings.token;
+const token = 'gapi_cIDIGdmX/RZIWDm0nh5QOBRrLN3g4s9XoY9/nEKAkJviQc/rnziWtgqq8xXfPTZufFd8Akp/YBrVnjVgG+M/zg==';
 socket = new WebSocket('wss://www.guilded.gg/websocket/v1', {
   headers: {
     Authorization: `Bearer ${token}`
