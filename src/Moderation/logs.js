@@ -7,7 +7,7 @@ let socket;
 let message; // Define message variable
 
 module.exports = {
-  name: "logsenabled",
+  name: "logs",
   description: "Enable or disable member join logs",
   run: async (client, msg, args) => {
     const server = await client.servers.fetch(msg.serverId);
