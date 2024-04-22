@@ -19,8 +19,9 @@ const mongodbUrl = 'mongodb+srv://weebjs:Summer8455@cluster0.ikzk44n.mongodb.net
 mongoose.connect(mongodbUrl);
 
 module.exports = {
-  name: "warnings",
+  name: "viewwarn",
   description: "Check the number of warnings for a user",
+  usage: "`p!viewwarn [@username]`",
   run: async (client, message, args) => {
     const server = await client.servers.fetch(message.serverId);
 

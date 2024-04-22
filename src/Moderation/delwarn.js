@@ -21,6 +21,7 @@ mongoose.connect(mongodbUrl);
 module.exports = {
   name: "delwarn",
   description: "Delete warnings for a user",
+  usage: "`p!delwarn [@username] [number]`",
   run: async (client, message, args) => {
     const server = await client.servers.fetch(message.serverId);
 

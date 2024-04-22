@@ -22,6 +22,7 @@ mongoose.connect(mongodbUrl);
 module.exports = {
   name: "warn",
   description: "Warn a user",
+  usage: "`p!warn [@username]`",
   run: async (client, message, args) => {
     const server = await client.servers.fetch(message.serverId);
 
