@@ -4,44 +4,45 @@ const WebSocket = require('ws');
 
 let logsEnabled = false;
 let socket;
+let message; // Define message variable
 
 module.exports = {
   name: "logsenabled",
   description: "Enable or disable member join logs",
-  usage: "`p!logs [enable/disable]`",
-  run: async (client, message, args) => {
-    try {
-      const server = await client.servers.fetch(message.serverId);
+  run: async (client, msg, args) => {
+    const server = await client.servers.fetch(msg.serverId);
 
-    if (message.authorId !== server.ownerId) {
+    if (msg.authorId !== server.ownerId) {
       const embed = new Embed()
         .setColor("RED")
         .setTitle("Error!")
         .setDescription(`You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you cant't execute this command!`);
 
-      return message.reply({ embeds: [embed], isSilent: true });
+      return msg.reply({ embeds: [embed], isSilent: true });
     }
 
+    try {
+      message = msg; // Assign message to the variable
       if (args[0] === "disable") {
         // Disable member join logs
         logsEnabled = false;
         const disabledEmbed = new Embed()
           .setTitle("Disabled!")
-          .setDescription("Welcome logs have now been disabled.")
-          .setColor("#FF3131");
+          .setDescription("Logs for this server have now been disabled.")
+          .setColor("RED");
         await message.reply({ embeds: [disabledEmbed] });
       } else if (args[0] === "enable") {
         // Enable member join logs
         logsEnabled = true;
         const enabledEmbed = new Embed()
           .setTitle("Enabled!")
-          .setDescription("Welcome logs have now been enabled in this channel.")
+          .setDescription("Logs for this server have now been enabled in this channel.")
           .setColor("GREEN");
         await message.reply({ embeds: [enabledEmbed] });
       } else {
         const usageEmbed = new Embed()
-          .setTitle("Error!")
-          .setDescription("Please use the correct command usage to execute this command. Here's an example: `p!logs [enable/disable]`")
+          .setTitle("Incorrect Command Usage!")
+          .setDescription("Please use the correct command usage to execute this command. Here's an example! `p!logs [enable/disable]`")
           .setColor("RED");
         await message.reply({ embeds: [usageEmbed] });
       }
@@ -59,7 +60,9 @@ socket = new WebSocket('wss://www.guilded.gg/websocket/v1', {
   },
 });
 
-
+socket.on('open', function() {
+  console.log('Connected to Guilded!');
+});
 
 socket.on('message', function incoming(data) {
   const json = JSON.parse(data);
@@ -75,19 +78,20 @@ socket.on('message', function incoming(data) {
       .setColor("GREEN");
 
     // Send the embed for member join event
-    message.reply({ embeds: [joinEmbed] });
+    message.send({ embeds: [joinEmbed] });
   }
 
   if (eventType === 'ServerMemberRemoved' && logsEnabled) {
-    const { member, serverId } = eventData;
+    const { userId, serverId } = eventData;
+    
 
     // Create an embed for the member leave event
     const leaveEmbed = new Embed()
       .setTitle("Member Left!")
-      .setDescription(`**${member.user.name}** has left the server.`)
+      .setDescription(`<@${userId}> has left the server.`)
       .setColor("RED");
 
     // Send the embed for member leave event
-    message.reply({ embeds: [leaveEmbed] });
+    message.send({ embeds: [leaveEmbed] });
   }
 });

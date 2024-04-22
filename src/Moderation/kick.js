@@ -56,7 +56,7 @@ module.exports = {
     } else {
       const embed = new Embed()
         .setColor("RED")
-        .setTitle("Error!")
+        .setTitle("Incorrect Command Usage!")
         .setDescription("Please mention or provide a user ID to kick a user. Here's an example: `p!kick [@username]`");
 
       return message.reply({ embeds: [embed] });
