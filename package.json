@@ -21,7 +21,6 @@
     "guilded.ts": "^0.20.2",
     "mathjs": "^11.8.0",
     "moment": "^2.29.4",
-    "mongofy": "^1.0.0",
     "node-fetch": "^3.2.6",
     "nodemon": "^3.1.0",
     "qs": "^6.11.1",
