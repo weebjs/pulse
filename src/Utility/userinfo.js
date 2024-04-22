@@ -27,6 +27,6 @@ module.exports = {
       ])
       
 
-      return message.reply({ embeds: [embed] });
+      return message.reply({ embeds: [embed], isSilent: true });
   },
 };

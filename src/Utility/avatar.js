@@ -21,6 +21,6 @@ module.exports = {
       .setColor("#EAD5FF")
       .setImage(member.user.avatar)
 
-      return message.reply({ embeds: [embed] });
+      return message.reply({ embeds: [embed], isSilent: true });
   },
 };
