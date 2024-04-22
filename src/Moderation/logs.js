@@ -15,7 +15,7 @@ module.exports = {
     if (msg.authorId !== server.ownerId) {
       const embed = new Embed()
         .setColor("RED")
-        .setTitle("Error!")
+        .setTitle("Insufficient Permissions!")
         .setDescription(`You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you cant't execute this command!`);
 
       return msg.reply({ embeds: [embed], isSilent: true });
@@ -42,7 +42,7 @@ module.exports = {
       } else {
         const usageEmbed = new Embed()
           .setTitle("Incorrect Command Usage!")
-          .setDescription("Please use the correct command usage to execute this command. Here's an example! `p!logs [enable/disable]`")
+          .setDescription("Please use the correct command usage to execute this command. \n\nHere's an example: `p!logs [enable/disable]`")
           .setColor("RED");
         await message.reply({ embeds: [usageEmbed] });
       }

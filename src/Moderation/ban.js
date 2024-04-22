@@ -10,7 +10,7 @@ module.exports = {
     if (message.authorId !== server.ownerId) {
       const embed = new Embed()
         .setColor("RED")
-        .setTitle("Error!")
+        .setTitle("Insufficient Permissions!")
         .setDescription(`You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you can't execute this command!`);
 
       return message.reply({ embeds: [embed], isSilent: true });
@@ -57,7 +57,7 @@ module.exports = {
       const embed = new Embed()
         .setColor("RED")
         .setTitle("Incorrect Command Usage!")
-        .setDescription("Please mention or provide a user ID to ban a user. Here's an example: `p!kick [@username]`");
+        .setDescription("Please mention or provide a user ID to ban a user. \n\n**Please make sure your command format is correct. Otherwise if it isn't, Please report to our [Support Server](https://guilded.gg/pulse)** \n\nHere's an example: \n`p!kick [@username]`");
 
       return message.reply({ embeds: [embed] });
     }
