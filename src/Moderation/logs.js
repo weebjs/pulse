@@ -1,6 +1,7 @@
 const { Embed } = require("guilded.js");
 const fs = require("fs");
 const WebSocket = require('ws');
+const settings = '../settings.json'
 
 let logsEnabled = false;
 let socket;
@@ -53,7 +54,7 @@ module.exports = {
 };
 
 // WebSocket connection
-const token = 'gapi_cIDIGdmX/RZIWDm0nh5QOBRrLN3g4s9XoY9/nEKAkJviQc/rnziWtgqq8xXfPTZufFd8Akp/YBrVnjVgG+M/zg==';
+const token = settings.token;
 socket = new WebSocket('wss://www.guilded.gg/websocket/v1', {
   headers: {
     Authorization: `Bearer ${token}`
@@ -74,7 +75,7 @@ socket.on('message', function incoming(data) {
     // Create an embed for the member join event
     const joinEmbed = new Embed()
       .setTitle("Member Joined!")
-      .setDescription(`**${member.user.name}** has joined the server!`)
+      .setDescription(`<@${member.user.id}> has joined the server!`)
       .setColor("GREEN");
 
     // Send the embed for member join event
