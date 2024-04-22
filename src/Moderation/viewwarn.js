@@ -22,6 +22,17 @@ module.exports = {
   name: "warnings",
   description: "Check the number of warnings for a user",
   run: async (client, message, args) => {
+    const server = await client.servers.fetch(message.serverId);
+
+    if (message.authorId !== server.ownerId) {
+      const embed = new Embed()
+        .setColor("RED")
+        .setTitle("Insufficient Permissions!")
+        .setDescription(`You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you cant't execute this command!`);
+
+      return message.reply({ embeds: [embed], isSilent: true });
+    }
+
     try {
       // Check if the command has the correct number of arguments
       const targetId = message.mentions.users[0].id;
