@@ -4,7 +4,7 @@ const moment = require("moment");
 module.exports = {
   name: "userinfo",
   description: "View someone's profile",
-  usage: "`re userinfo [@me]`",
+  usage: "`p!avatar [@me]`",
   run: async (client, message, args) => {
     let user;
     if (!args[0]) {

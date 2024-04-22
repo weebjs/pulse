@@ -3,6 +3,7 @@ const moment = require("moment");
 
 module.exports = {
   description: "get information about the server.",
+  usage: "`p!serverinfo`",
   aliases: ["guild"],
   run: async (client, message) => {
     try {

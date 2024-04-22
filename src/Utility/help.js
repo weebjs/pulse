@@ -4,7 +4,7 @@ const fs = require("fs");
 module.exports = {
   name: "help",
   description: "*View every command for the bot.*",
-  usage: "`$help [command name]`",
+  usage: "`p!help [command name]`",
   run: async (client, message, args) => {
     try {
       const commandName = args[0]; // Get the command name from the user's input
@@ -24,7 +24,8 @@ module.exports = {
           // Create an embed with the command name and description
           const embed = new Embed()
             .setTitle(command.name)
-            .setDescription(`*${command.description}* \n\n**Usage:** \`${command.usage || 'None'}\` \n**Aliases:** \`${command.aliases || 'None'}\``);
+            .setDescription(`*${command.description}* \n\n**Usage:** \`${command.usage || 'None'}\` \n**Aliases:** \`${command.aliases || 'None'}\``)
+            .setColor("#EAD5FF");
 
           // Send the embed as a reply
           const helpMessage = await message.reply({ embeds: [embed], isSilent: true });
