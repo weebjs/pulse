@@ -1,6 +1,6 @@
 const { Embed } = require("guilded.js");
 const fs = require("fs");
-const WebSocket = require('ws')
+const WebSocket = require('ws');
 
 let logsEnabled = false;
 let socket;
@@ -11,13 +11,12 @@ module.exports = {
   description: "Enable or disable member join logs",
   run: async (client, msg, args) => {
     const server = await client.servers.fetch(msg.serverId);
-    
 
     if (msg.authorId !== server.ownerId) {
       const embed = new Embed()
         .setColor("RED")
         .setTitle("Insufficient Permissions!")
-        .setDescription(`You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you cant't execute this command!`);
+        .setDescription(`You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you can't execute this command!`);
 
       return msg.reply({ embeds: [embed], isSilent: true });
     }
@@ -80,7 +79,6 @@ socket.on('message', function incoming(data) {
 
   if (eventType === 'ServerMemberRemoved' && logsEnabled) {
     const { userId, serverId } = eventData;
-    
 
     // Create an embed for the member leave event
     const leaveEmbed = new Embed()
@@ -92,3 +90,21 @@ socket.on('message', function incoming(data) {
     message.send({ embeds: [leaveEmbed] });
   }
 });
+
+if (eventType === 'BotServerMembershipCreated') {
+  const { server: { defaultChannelId } } = eventData;
+  // posts welcome message
+  fetch(`https://www.guilded.gg/api/v1/channels/${defaultChannelId}/messages`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      embeds: [{
+        title: "Hello, I'm Pulse!",
+        description: `If you would like to know more use the \`p!help\` command.\n\n**Links**\n[Support Server](https://www.guilded.gg/i/pW14q1v2)\n[Invite Link](https://www.guilded.gg/b/f298100e-a76a-48e1-ba8f-e11008af8250)`,
+      }]
+    }),
+  });
+}
