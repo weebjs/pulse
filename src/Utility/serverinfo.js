@@ -20,6 +20,7 @@ module.exports = {
       const memberIds = members.map((member) => member.id); // Extract member IDs
 
       const embed = new Embed()
+      .setThumbnail(server.raw.avatar)
         .addFields([
           { name: "Name:", value: server.name, inline: false },
           { name: "Description:", value: server.description ? server.description : "None" },

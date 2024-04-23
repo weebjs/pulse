@@ -16,17 +16,20 @@ module.exports = {
     const member = await client.members.fetch(message.serverId, user);
     const server = await client.servers.fetch(message.serverId);
 
+    const roles = member.roleIds.map(roleId => `<@${roleId}>`).join(", ");
+
     const embed = new Embed()
       .setTitle(`<@${user}> (${user})`)
       .setColor("#EAD5FF")
+      .setThumbnail(member.user.avatar) 
       .addFields([
-        { name: "Nickname", value: member.nickname ? member.nickname : "None", inline: true },
+        { name: "Nickname", value: member.nickname ? member.nickname : "None", inline: false },
         { name: "ID", value: member.user.id, inline: false },
         { name: "Server Join", value: moment(member.joinedAt).format("M/D/YYYY h:mm A"), inline: false },
         { name: "Account Creation", value: moment(member.user.createdAt).format("M/D/YYYY h:mm A"), inline: false },
-      ])
-      
+        { name: "Roles", value: roles || "None", inline: false },
+      ]);
 
-      return message.reply({ embeds: [embed], isSilent: true });
+    return message.reply({ embeds: [embed], isSilent: true });
   },
 };

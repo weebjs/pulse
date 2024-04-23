@@ -11,6 +11,7 @@ module.exports = {
   description: "Enable or disable member join logs",
   run: async (client, msg, args) => {
     const server = await client.servers.fetch(msg.serverId);
+    
 
     if (msg.authorId !== server.ownerId) {
       const embed = new Embed()
@@ -36,7 +37,7 @@ module.exports = {
         logsEnabled = true;
         const enabledEmbed = new Embed()
           .setTitle("Enabled!")
-          .setDescription("Logs for this server have now been enabled in this channel.")
+          .setDescription("Logs for this server have now been enabled.")
           .setColor("GREEN");
         await message.reply({ embeds: [enabledEmbed] });
       } else {
