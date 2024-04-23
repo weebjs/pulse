@@ -21,7 +21,6 @@ module.exports = {
     const embed = new Embed()
       .setTitle(`<@${user}> (${user})`)
       .setColor("#EAD5FF")
-      .setThumbnail(member.user.avatar) 
       .addFields([
         { name: "Nickname", value: member.nickname ? member.nickname : "None", inline: false },
         { name: "ID", value: member.user.id, inline: false },
