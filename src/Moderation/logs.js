@@ -61,10 +61,6 @@ socket = new WebSocket('wss://www.guilded.gg/websocket/v1', {
   },
 });
 
-socket.on('open', function() {
-  console.log('Connected to Guilded!');
-});
-
 socket.on('message', function incoming(data) {
   const json = JSON.parse(data);
   const { t: eventType, d: eventData } = json;
