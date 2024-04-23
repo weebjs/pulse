@@ -89,22 +89,22 @@ socket.on('message', function incoming(data) {
     // Send the embed for member leave event
     message.send({ embeds: [leaveEmbed] });
   }
-});
 
-if (eventType === 'BotServerMembershipCreated') {
-  const { server: { defaultChannelId } } = eventData;
-  // posts welcome message
-  fetch(`https://www.guilded.gg/api/v1/channels/${defaultChannelId}/messages`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      embeds: [{
-        title: "Hello, I'm Pulse!",
-        description: `If you would like to know more use the \`p!help\` command.\n\n**Links**\n[Support Server](https://www.guilded.gg/i/pW14q1v2)\n[Invite Link](https://www.guilded.gg/b/f298100e-a76a-48e1-ba8f-e11008af8250)`,
-      }]
-    }),
-  });
-}
+  if (eventType === 'BotServerMembershipCreated') {
+    const { server: { defaultChannelId } } = eventData;
+    // posts welcome message
+    fetch(`https://www.guilded.gg/api/v1/channels/${defaultChannelId}/messages`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        embeds: [{
+          title: "Hello, I'm Pulse!",
+          description: `If you would like to know more use the \`p!help\` command.\n\n**Links**\n[Support Server](https://www.guilded.gg/i/pW14q1v2)\n[Invite Link](https://www.guilded.gg/b/f298100e-a76a-48e1-ba8f-e11008af8250)`,
+        }]
+      }),
+    });
+  }
+});
