@@ -50,6 +50,7 @@ module.exports = {
             .join(", ");
 
           embed.addField(`${folder.charAt(0).toUpperCase() + folder.slice(1)}`, `${commandList}`, false);
+          embed.addField("Links", "[Support Server](https://www.guilded.gg/i/2DlQ6rn2) • [Bot Invite](https://www.guilded.gg/b/f298100e-a76a-48e1-ba8f-e11008af8250)")
         }
 
         // Send the embed as a reply
