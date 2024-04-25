@@ -1,6 +1,5 @@
 const { Embed } = require("guilded.js");
 const WebSocket = require('ws');
-const fetch = require('node-fetch');
 const fs = require('fs');
 
 let logsEnabled = false;
