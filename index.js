@@ -6,7 +6,7 @@ const client = new Client({token : token});
 
 const express = require('express');
 const app = express();
-let port = 3008;
+let port = 3000;
 app.get('/', (req, res) => {
   res.send(`Ready`)
 })

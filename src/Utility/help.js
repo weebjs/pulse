@@ -33,7 +33,7 @@ module.exports = {
       } else {
         // If no command name is provided, display information about all available commands
         const commandsPath = "./src"; // Path to the commands folder
-        const folders = fs.readdirSync(commandsPath); // Get the list of folders in the commands folder
+        const folders = fs.readdirSync(commandsPath); // Get kthe list of folders in the commands folder
 
         const embed = new Embed()
           .setTitle("Welcome to the Help Menu!")
@@ -41,26 +41,15 @@ module.exports = {
           .setColor("#EAD5FF");
 
         for (const folder of folders) {
-          if (folder.toLowerCase() === "Database") {
-            continue; // Skip the "database" folder
-          }
-
           const folderPath = `${commandsPath}/${folder}`;
           const files = fs.readdirSync(folderPath);
 
           const commandList = files
             .filter(file => file.endsWith(".js"))
-            .map(file => {
-              const commandName = file.slice(0, -3);
-              const command = client.commands.get(commandName);
-              return command ? `\`${commandName}\`` : null;
-            })
-            .filter(Boolean)
+            .map(file => `\`${file.slice(0, -3)}\``)
             .join(", ");
 
-          if (commandList) {
-            embed.addField(`${folder.charAt(0).toUpperCase() + folder.slice(1)}`, `${commandList}`, false);
-          }
+          embed.addField(`${folder.charAt(0).toUpperCase() + folder.slice(1)}`, `${commandList}`, false);
         }
 
         // Send the embed as a reply
