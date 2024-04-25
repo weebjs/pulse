@@ -1,5 +1,5 @@
 const { Embed } = require("guilded.js");
-const Warning = require("/workspace/pulse/lib/db");
+const Warning = require("../Database/warndb");
 
 module.exports = {
   name: "viewwarn",
