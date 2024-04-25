@@ -1,5 +1,5 @@
 const { Embed } = require("guilded.js");
-const Warning = require("../lib/db");
+const Warning = require("lib/db.js");
 
 module.exports = {
   name: "viewwarn",
