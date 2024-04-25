@@ -1,6 +1,6 @@
 const { Embed } = require("guilded.js");
+const fs = require("fs");
 const WebSocket = require('ws');
-const fs = require('fs');
 
 let logsEnabled = false;
 let socket;
@@ -52,65 +52,59 @@ module.exports = {
   },
 };
 
-// Function to establish WebSocket connection
-function establishWebSocketConnection() {
-  const token = 'gapi_cIDIGdmX/RZIWDm0nh5QOBRrLN3g4s9XoY9/nEKAkJviQc/rnziWtgqq8xXfPTZufFd8Akp/YBrVnjVgG+M/zg==';
-  socket = new WebSocket('wss://www.guilded.gg/websocket/v1', {
-    headers: {
-      Authorization: `Bearer ${token}`
-    },
-  });
+// WebSocket connection
+const token = 'gapi_cIDIGdmX/RZIWDm0nh5QOBRrLN3g4s9XoY9/nEKAkJviQc/rnziWtgqq8xXfPTZufFd8Akp/YBrVnjVgG+M/zg==';
+socket = new WebSocket('wss://www.guilded.gg/websocket/v1', {
+  headers: {
+    Authorization: `Bearer ${token}`
+  },
+});
 
-  socket.on('open', () => {
-    console.log('WebSocket connection established');
-  });
+socket.on('message', function incoming(data) {
+  const json = JSON.parse(data);
+  const { t: eventType, d: eventData } = json;
 
-  socket.on('message', function incoming(data) {
-    const json = JSON.parse(data);
-    const { t: eventType, d: eventData } = json;
+  if (eventType === 'ServerMemberJoined' && logsEnabled) {
+    const { member, serverId } = eventData;
 
-    if (eventType === 'ServerMemberJoined' && logsEnabled) {
-      const { member, serverId } = eventData;
+    // Create an embed for the member join event
+    const joinEmbed = new Embed()
+      .setTitle("Member Joined!")
+      .setDescription(`<@${member.user.id}> has joined the server!`)
+      .setColor("GREEN");
 
-      // Create an embed for the member join event
-      const joinEmbed = new Embed()
-        .setTitle("Member Joined!")
-        .setDescription(`<@${member.user.id}> has joined the server!`)
-        .setColor("GREEN");
+    // Send the embed for member join event
+    message.send({ embeds: [joinEmbed] });
+  }
 
-      // Send the embed for member join event
-      message.send({ embeds: [joinEmbed] });
-    }
+  if (eventType === 'ServerMemberRemoved' && logsEnabled) {
+    const { userId, serverId } = eventData;
 
-    if (eventType === 'ServerMemberRemoved' && logsEnabled) {
-      const { userId, serverId } = eventData;
+    // Create an embed for the member leave event
+    const leaveEmbed = new Embed()
+      .setTitle("Member Left!")
+      .setDescription(`<@${userId}> has left the server.`)
+      .setColor("RED");
 
-      // Create an embed for the member leave event
-      const leaveEmbed = new Embed()
-        .setTitle("Member Left!")
-        .setDescription(`<@${userId}> has left the server.`)
-        .setColor("RED");
+    // Send the embed for member leave event
+    message.send({ embeds: [leaveEmbed] });
+  }
 
-      // Send the embed for member leave event
-      message.send({ embeds: [leaveEmbed] });
-    }
-
-    if (eventType === 'BotServerMembershipCreated') {
-      const { server: { defaultChannelId } } = eventData;
-      // posts welcome message
-      fetch(`https://www.guilded.gg/api/v1/channels/${defaultChannelId}/messages`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          embeds: [{
-            title: "Hello, I'm Pulse!",
-            description: `If you would like to know more use the \`p!help\` command.\n\n**Links**\n[Support Server](https://www.guilded.gg/i/pW14q1v2)\n[Invite Link](https://www.guilded.gg/b/f298100e-a76a-48e1-ba8f-e11008af)`
-          }]
-        })
-      });
-    }
-  });
-}
+  if (eventType === 'BotServerMembershipCreated') {
+    const { server: { defaultChannelId } } = eventData;
+    // posts welcome message
+    fetch(`https://www.guilded.gg/api/v1/channels/${defaultChannelId}/messages`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        embeds: [{
+          title: "Hello, I'm Pulse!",
+          description: `If you would like to know more use the \`p!help\` command.\n\n**Links**\n[Support Server](https://www.guilded.gg/i/pW14q1v2)\n[Invite Link](https://www.guilded.gg/b/f298100e-a76a-48e1-ba8f-e11008af8250)`,
+        }]
+      }),
+    });
+  }
+});
