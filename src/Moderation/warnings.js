@@ -48,7 +48,7 @@ module.exports = {
     } catch (error) {
       const errorEmbed = new Embed()
         .setTitle("Error!")
-        .setDescription("An error occurred while processing the command. \n\n**Please make sure your command format is correct. Otherwise if it isn't, Please report to our [Support Server](https://guilded.gg/pulse)** \n\nHere's an example: \n`p!viewwarn [@username]`")
+        .setDescription("An error occurred while processing the command. \n\n**Please make sure your command format is correct. Otherwise if it isn't, Please report to our [Support Server](https://guilded.gg/pulse)** \n\nHere's an example: \n`p!warnings [@username]`")
         .setColor("RED");
       await message.reply({ embeds: [errorEmbed] });
     }
