@@ -57,7 +57,7 @@ module.exports = {
       const embed = new Embed()
         .setColor("RED")
         .setTitle("Incorrect Command Usage!")
-        .setDescription("Please mention or provide a user ID to ban a user. \n\n**Please make sure your command format is correct. Otherwise if it isn't, Please report to our [Support Server](https://guilded.gg/pulse)** \n\nHere's an example: \n`p!kick [@username]`");
+        .setDescription("Please mention or provide a user ID to ban a user. \n\n**Please make sure your command format is correct. Otherwise if it isn't, Please report to our [Support Server](https://guilded.gg/pulse)** \n\nHere's an example: \n`p!ban [@username]`");
 
       return message.reply({ embeds: [embed] });
     }
