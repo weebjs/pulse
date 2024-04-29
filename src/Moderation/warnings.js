@@ -11,7 +11,7 @@ module.exports = {
     if (message.authorId !== server.ownerId) {
       const embed = new Embed()
         .setColor("RED")
-        .setTitle("Insufficient Permissions!")
+        .setTitle("Insufficient Permissions!") 
         .setDescription(
           `You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you can't execute this command!`
         );
