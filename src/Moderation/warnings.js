@@ -1,5 +1,22 @@
 const { Embed } = require("guilded.js");
-const { getWarningCount } = require("lib/warndb.js");
+const mongoose = require("mongoose");
+
+// Define the warning schema if it's not already defined
+if (!mongoose.models.Warning) {
+  const warningSchema = new mongoose.Schema({
+    userId: { type: String, required: true },
+    reason: { type: String, default: "None" },
+    warnedBy: { type: String, required: true },
+    warningId: { type: String, required: true },
+  });
+
+  // Create a model based on the warning schema
+  mongoose.model("Warning", warningSchema);
+}
+
+// Replace 'YOUR_MONGODB_URL' with your actual MongoDB URL
+const mongodbUrl = 'mongodb+srv://weebjs:Summer8455@cluster0.ikzk44n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+mongoose.connect(mongodbUrl);
 
 module.exports = {
   name: "viewwarn",
@@ -11,19 +28,17 @@ module.exports = {
     if (message.authorId !== server.ownerId) {
       const embed = new Embed()
         .setColor("RED")
-        .setTitle("Insufficient Permissions!") 
-        .setDescription(
-          `You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you can't execute this command!`
-        );
+        .setTitle("Insufficient Permissions!")
+        .setDescription(`You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you cant't execute this command!`);
 
       return message.reply({ embeds: [embed], isSilent: true });
     }
 
     try {
+      // Check if the command has the correct number of arguments
       const targetId = message.mentions.users[0].id;
-
-      // Get the warning count from MongoDB
-      const warningCount = await getWarningCount(targetId);
+      const Warning = mongoose.model("Warning");
+      const warningCount = await Warning.countDocuments({ userId: targetId });
 
       const embed = new Embed()
         .setTitle("User Warnings")
@@ -33,9 +48,7 @@ module.exports = {
     } catch (error) {
       const errorEmbed = new Embed()
         .setTitle("Error!")
-        .setDescription(
-          "An error occurred while processing the command. \n\n**Please make sure your command format is correct. Otherwise if it isn't, Please report to our [Support Server](https://guilded.gg/pulse)** \n\nHere's an example: \n`p!warnings [@username]`"
-        )
+        .setDescription("An error occurred while processing the command. \n\n**Please make sure your command format is correct. Otherwise if it isn't, Please report to our [Support Server](https://guilded.gg/pulse)** \n\nHere's an example: \n`p!warnings [@username]`")
         .setColor("RED");
       await message.reply({ embeds: [errorEmbed] });
     }
