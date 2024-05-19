@@ -7,6 +7,11 @@ module.exports = {
         if (!command) command = client.commands.get(client.aliases.get(cmd));
         if(!command) return;
         
-        command.run(client, message, args)
+        try {
+            await command.run(client, message, args);
+        } catch (err) {
+            console.error("Error while executing the command:", err);
+            await message.send("An error occurred while executing the command. Please try again later.");
+        }
     }
 }

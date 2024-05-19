@@ -15,8 +15,7 @@ module.exports = {
 
       return message.reply({ embeds: [embed], isSilent: true });
     }
-    
-    
+
     let targetId;
     if (message.mentions && message.mentions.users) {
       targetId = message.mentions.users[0].id;
@@ -57,7 +56,8 @@ module.exports = {
       const embed = new Embed()
         .setColor("RED")
         .setTitle("Incorrect Command Usage!")
-        .setDescription("Please mention or provide a user ID to kick a user. \n\n**Please make sure your command format is correct. Otherwise if it isn't, Please report to our [Support Server](https://guilded.gg/pulse)** \n\nHere's an example: \n`p!kick [@username]`");
+        .setDescription("Please mention or provide a user ID to kick a user.")
+        .addField("Usage", `?kick [@username]`);
 
       return message.reply({ embeds: [embed] });
     }
