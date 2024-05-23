@@ -11,9 +11,10 @@ module.exports = {
       const embed = new Embed()
         .setColor("RED")
         .setTitle("Insufficient Permissions!")
-        .setDescription(`You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you cant't execute this command!`);
+        .setDescription("You don't have the required permissions to execute this command!")
+        .setFooter("This command is only for server owners only.");
 
-      return message.reply({ embeds: [embed], isSilent: true });
+      return message.reply({ embeds: [embed] });
     }
 
     let targetId;
