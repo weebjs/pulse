@@ -1,4 +1,5 @@
 const { Embed } = require("guilded.js");
+
 module.exports = {
   name: "purge",
   description: "purge x amount of messages",
@@ -10,8 +11,9 @@ module.exports = {
         const embed = new Embed()
           .setColor("RED")
           .setTitle("Insufficient Permissions!")
-          .setDescription(`You need to be a server owner to execute this command. \n\nIf you aren't the owner (<@${server.ownerId}>), then you can't execute this command!`);
-  
+          .setDescription("You don't have the required permissions to execute this command!")
+          .setFooter("This command is only for server owners only.");
+
         return message.reply({ embeds: [embed] });
       }
 
@@ -19,8 +21,8 @@ module.exports = {
       if (!args[0] || isNaN(args[0])) {
         const embed = new Embed()
           .setTitle("Oh no!")
-          .setDescription("Please add an ammount of messages to delete.")
-          .addField("Usage", `\`\`\`?purge [number]\`\`\``)
+          .setDescription("Please add an amount of messages to delete.")
+          .addField("Usage", "```?purge [number]```")
           .setColor("RED");
 
         return message.reply({ embeds: [embed] });
@@ -34,7 +36,7 @@ module.exports = {
         const embed = new Embed()
           .setTitle("Oh no!")
           .setDescription("The maximum number of messages to delete is 50. Please try again.")
-          .addField("Usage", `\`\`\`?purge [number]\`\`\``)
+          .addField("Usage", "```?purge [number]```")
           .setColor("RED");
 
         return message.reply({ embeds: [embed] });
@@ -60,7 +62,8 @@ module.exports = {
       // Send an error message to the user
       const embed = new Embed()
         .setTitle("Error!")
-        .setDescription("An error occurred while executing the `purge` command. Please try again later.")
+        .setDescription("An error occurred while executing the command.")
+        .setFooter("Please try again later.")
         .setColor("RED");
       return message.reply({ embeds: [embed] });
     }
