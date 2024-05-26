@@ -4,7 +4,7 @@ const fs = require("fs");
 module.exports = {
   name: "help",
   description: "*View every command for the bot.*",
-  usage: "`p!help [command name]`",
+  usage: "`!help [command name]`",
   run: async (client, message, args) => {
     try {
       const commandName = args[0]; // Get the command name from the user's input

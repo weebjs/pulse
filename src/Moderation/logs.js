@@ -9,6 +9,7 @@ let message; // Define message variable
 module.exports = {
   name: "logs",
   description: "Enable or disable member join logs",
+  usage: "`!logs (enable/disable)`",
   run: async (client, msg, args) => {
     const server = await client.servers.fetch(msg.serverId);
 

@@ -3,7 +3,7 @@ const { Embed } = require("guilded.js");
 module.exports = {
   name: "ban",
   description: "Ban a member from the server.",
-  usage: "`p!ban [@me]`",
+  usage: "`!ban [@me]`",
   run: async (client, message, args) => {
     const server = await client.servers.fetch(message.serverId);
 
