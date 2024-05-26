@@ -6,6 +6,16 @@ module.exports = {
   usage: "`!nickname [@user] (new_nickname)`",
   run: async (client, message, args) => {
     try {
+
+      if (message.authorId !== server.ownerId) {
+      const embed = new Embed()
+        .setColor("RED")
+        .setTitle("Insufficient Permissions!")
+        .setDescription("You don't have the required permissions to execute this command!")
+        .setFooter("This command is only for server owners only.");
+
+      return message.reply({ embeds: [embed] });
+    }
       // Get the mentioned user
       const mentionedUser = message.mentions.users[0].id;
 
