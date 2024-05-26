@@ -10,14 +10,14 @@ module.exports = {
       const mentionedUser = message.mentions.users[0].id;
 
       if (message.authorId !== server.ownerId) {
-      const embed = new Embed()
-        .setColor("RED")
-        .setTitle("Insufficient Permissions!")
-        .setDescription("You don't have the required permissions to execute this command!")
-        .setFooter("This command is only for server owners only.");
+        const embed = new Embed()
+          .setColor("RED")
+          .setTitle("Insufficient Permissions!")
+          .setDescription("You don't have the required permissions to execute this command!")
+          .setFooter("This command is only for server owners only.");
 
-      return message.reply({ embeds: [embed] });
-    }
+        return message.reply({ embeds: [embed] });
+      }
 
       // Check if a user was mentioned
       if (!mentionedUser) {
