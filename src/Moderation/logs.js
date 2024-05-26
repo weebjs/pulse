@@ -45,8 +45,8 @@ module.exports = {
         const usageEmbed = new Embed()
           .setTitle("Incorrect Command Usage!")
           .setDescription("Please use the correct command usage to execute this command.")
-          .setColor("RED");
-        .addField("Usage", "\`\`\`!logs [enable/disable]\`\`\`")
+          .setColor("RED")
+          .addField("Usage", "`!logs [enable/disable]`");
         await msg.reply({ embeds: [usageEmbed] });
       }
     } catch (error) {
