@@ -6,6 +6,8 @@ module.exports = {
   usage: "`!nickname [@user] (new_nickname)`",
   run: async (client, message, args) => {
     try {
+      // Get the mentioned user
+      const mentionedUser = message.mentions.users[0].id;
 
       if (message.authorId !== server.ownerId) {
       const embed = new Embed()
@@ -16,8 +18,6 @@ module.exports = {
 
       return message.reply({ embeds: [embed] });
     }
-      // Get the mentioned user
-      const mentionedUser = message.mentions.users[0].id;
 
       // Check if a user was mentioned
       if (!mentionedUser) {
