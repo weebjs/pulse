@@ -4,10 +4,12 @@ module.exports = {
   name: "nickname",
   description: "Change a user's nickname",
   usage: "`!nickname [@user] (new_nickname)`",
+  aliases: ["nick"],
   run: async (client, message, args) => {
     try {
       // Get the mentioned user
-      const mentionedUser = message.mentions.users[0].id;
+      const server = await client.servers.fetch(message.serverId);
+      const mentionedUser = message?.mentions?.users[0].id;
 
       if (message.authorId !== server.ownerId) {
         const embed = new Embed()
@@ -75,6 +77,7 @@ module.exports = {
         return message.reply({ embeds: [embed] });
       }
     } catch (err) {
+      console.log(err)
       const embed = new Embed()
         .setTitle("Error!")
         .setDescription("An error occurred while executing the command.")

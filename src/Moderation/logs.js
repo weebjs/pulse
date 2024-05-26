@@ -46,7 +46,7 @@ module.exports = {
           .setTitle("Incorrect Command Usage!")
           .setDescription("Please use the correct command usage to execute this command.")
           .setColor("RED")
-          .addField("Usage", "`!logs [enable/disable]`");
+          .addField("Usage", "```!logs [enable/disable]```");
         await msg.reply({ embeds: [usageEmbed] });
       }
     } catch (error) {
