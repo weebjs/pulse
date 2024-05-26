@@ -31,7 +31,6 @@ module.exports = {
           { name: "URL:", value: server.url ? `[${server.name}](${server.url})` : "❔", inline: false },
           { name: "Members:", value: `${memberIds.length}`, inline: false }
         ])
-        .setImage(server.raw.banner)
         .setColor("#EAD5FF");
 
       return message.reply({ embeds: [embed], isSilent: true });
