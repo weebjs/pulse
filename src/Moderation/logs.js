@@ -20,7 +20,7 @@ module.exports = {
         .setDescription("You don't have the required permissions to execute this command!")
         .setFooter("This command is only for server owners only.");
 
-      return message.reply({ embeds: [embed] });
+      return msg.reply({ embeds: [embed] });
     }
 
     try {
@@ -32,7 +32,7 @@ module.exports = {
           .setTitle("Disabled!")
           .setDescription("Logs for this server have now been disabled.")
           .setColor("RED");
-        await message.reply({ embeds: [disabledEmbed] });
+        await msg.reply({ embeds: [disabledEmbed] });
       } else if (args[0] === "enable") {
         // Enable member join logs
         logsEnabled = true;
@@ -40,13 +40,14 @@ module.exports = {
           .setTitle("Enabled!")
           .setDescription("Logs for this server have now been enabled.")
           .setColor("GREEN");
-        await message.reply({ embeds: [enabledEmbed] });
+        await msg.reply({ embeds: [enabledEmbed] });
       } else {
         const usageEmbed = new Embed()
           .setTitle("Incorrect Command Usage!")
-          .setDescription("Please use the correct command usage to execute this command. \n\nHere's an example: `p!logs [enable/disable]`")
+          .setDescription("Please use the correct command usage to execute this command.")
           .setColor("RED");
-        await message.reply({ embeds: [usageEmbed] });
+        .addField("Usage", "\`\`\`!logs [enable/disable]\`\`\`")
+        await msg.reply({ embeds: [usageEmbed] });
       }
     } catch (error) {
       console.error(error);
