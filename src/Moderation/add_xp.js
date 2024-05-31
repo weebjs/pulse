@@ -10,8 +10,21 @@ module.exports = {
   run: async (client, message, args) => {
     try {
       // Get the mentioned user
+      const server = await client.servers.fetch(message.serverId);
       const mentionedUser = message?.mentions?.users[0].id;
-      console.log(mentionedUser)
+
+
+      if (message.authorId !== server.ownerId) {
+        const embed = new Embed()
+          .setColor("RED")
+          .setTitle("Insufficient Permissions!")
+          .setDescription("You don't have the required permissions to execute this command!")
+          .setFooter("This command is only for server owners only.");
+
+        return message.reply({ embeds: [embed] });
+      }
+
+      
       if (!mentionedUser) {
         return message.reply({
           embeds: [
